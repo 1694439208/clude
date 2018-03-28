@@ -1,0 +1,390 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>云代码-海绵</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="layer/theme/default/layer.css"  media="all">
+  <script src="js/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/base.js"></script>
+  <style>
+  .body-box{
+    padding: 20px;
+    overflow: hidden;
+	    font-family: 'Ubuntu Mono',"PingFang SC","Lantinghei SC","Microsoft YaHei",arial,"\5b8b\4f53",sans-serif,tahoma;
+    letter-spacing: 1.5px;
+	border-bottom: solid 1px rgba(168, 214, 186, 0.82);
+  }
+  .mg-b-10{
+      font-size: 25px;
+    font-weight: 300;
+	margin-bottom: 10px;
+	
+  }
+  </style>
+</head>
+<body>
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->  
+<ul class="layui-nav layui-bg-green" lay-filter="demo" style="
+    position: fixed;
+    z-index: 10000;
+    width: 100%;
+">
+
+  <li class="layui-nav-item">
+    <a href="#">用户</a>
+	<dl class="layui-nav-child">
+      <dd><a href="javascript:;">登陆</a></dd>
+	  <dd><a href="javascript:;">同步</a></dd>
+      <dd><a href="javascript:;">退了</a></dd>
+    </dl>
+  </li>
+  <li class="layui-nav-item">
+    <a href="#">Code</a>
+  </li>
+  <li class="layui-nav-item">
+    <a href="#">api文档<span class="layui-badge-dot"></span></a>
+  </li>
+</ul> 
+
+
+<div class="layui-container">  
+  <div class="layui-row">
+    <div class="layui-col-md1"style="height: 11px;"></div>
+    <div class="layui-col-md10">
+		<div class="layui-tab" lay-filter="demo">
+			<ul class="layui-tab-title" style="visibility:hidden;">
+				<li lay-id="a">登陆</li>
+				<li lay-id="b">同步</li>
+				<li lay-id="c">退出</li>
+				<li lay-id="d">code</li>
+				<li lay-id="e">api文档</li>
+			</ul>
+			<div class="layui-tab-content">
+			<!--登陆部分-->
+				<div class="layui-tab-item">
+				<div class="layui-row"><div class="layui-col-md6 layui-col-md-offset3"><div action="" class="layui-form" ><div class="layui-form-item"><input type="text" placeholder="用户名" class="layui-input" data-form-un="1512648887305.436"></div> <div class="layui-form-item"><input type="password" placeholder="密码" class="layui-input" data-form-pw="1512648887305.436"></div> <div class="layui-form-item"><div class="layui-btn layui-btn-block">确认登录</div></div></div></div></div>
+				</div>
+			<!--同步部分-->
+				<div class="layui-tab-item">
+					<div class="body-box news-list">
+					<h3 class="mg-b-10"><a href="#" class="node">采集淘宝</a></h3>
+					<p>展示部分</p></div>
+					<div class="body-box news-list">
+					<h3 class="mg-b-10"><a href="#" class="node">采集百度</a></h3>
+					<p>展示部分</p></div>
+					<div class="body-box news-list">
+					<h3 class="mg-b-10"><a href="#" class="node">采集京东</a></h3>
+					<p>展示部分</p></div>
+					<div class="body-box news-list">
+					<h3 class="mg-b-10"><a href="#" class="node">采集***</a></h3>
+					<p>展示部分</p></div>
+					<div class="body-box news-list">
+					<h3 class="mg-b-10"><a href="#" class="node">采集***</a></h3>
+					<p>展示部分</p></div>
+				</div>
+			<!--api文档-->
+				<div class="layui-tab-item">
+					。。。。
+				</div>
+			<!--调试部分-->
+				<div class="layui-tab-item">
+					<pre id="code" class="ace_editor" style="min-height:500px;border: solid 1px #a5d0b6;"><textarea class="ace_text-input">
+					
+HTTP.Log("----------------新闻采集-----------------");
+for(var j=0;j<5;j++)
+{
+	var url="http://cre.mix.sina.com.cn/get/cms/feed?callback=jQuery111203966428968720499_1511534461047&cateid=1z_22&cre=tianyi&mod=pctechc&merge=3&statics=1&length=15&up=2&down=0&tm=1511534258&action=1&offset=0&ad=%7B%22rotate_count%22%3A100%2C%22platform%22%3A%22pc%22%2C%22channel%22%3A%22tianyi_pctech%22%2C%22page_url%22%3A%22http%3A%2F%2Ftech.sina.com.cn%2F%22%2C%22timestamp%22%3A1511534462924%7D&port=3602&imp_type=2&pcProduct=11&ctime=1511508474&_=1511534461052";
+	var asd=HTTP.Get(url).toString();
+	var json=eval('('+asd.split("(")[1].split(")")[0]+')');
+	for(var i=0;i<json.data.length;i++)
+	{
+		HTTP.Log(json.data[i].title);
+	}
+}
+					</textarea></pre>
+					<div class="layui-row">
+					<div class="layui-col-md12" style="height: 40px;">
+					<div class="layui-form" action="">
+						<div class="layui-form-item" style="float: right;">
+						  <div class="layui-input-block">
+										<input type="hidden" name="ExPws" value="">
+										<input lay-filter="form_1" type="radio" id="a" name="sex" value="nan" title="使用html展示数据">
+										<input lay-filter="form_2" type="radio" id="b" name="sex" value="nv" title="使用纯文本展示数控" checked>
+										<input type="radio" name="sex" value="" title="使用原数据展示" disabled>
+										<button class="layui-btn" id="bot"><i class="layui-icon">&#xe623;</i> 调试上述代码</button>
+						  </div>
+
+						</div>
+					</div>
+					</div>
+					</div>
+				</div>
+				<div class="layui-tab-item">
+				<div class="layui-collapse" lay-accordion>
+				<div class="layui-colla-item">
+					<h2 class="layui-colla-title">更新说明</h2>
+					<div class="layui-colla-content layui-show">
+					<pre class="layui-code">
+此脚本为纯js语法打造-包含一些js对象方法例如eval，DATE，
+支持标准json字符串和json对象互转-具体用法为js请自行解决
+HTTP.get()返回的是jsonp的dom对象可以用jsonp用法解析dom树  
+例如：
+var date=HTTP.Get('http://www.baidu.com');
+var list=date.select('.link_title');
+for(var i=0;i&#x3C;list.length;i++)
+{
+	HTTP.Log(HTTP.Md5(list[i].text())+"\r\n");
+}
+等等用法操作：熟悉java和js可以快速上手
+
+将来准备支持：
+	数据托管，
+	任务托管
+	等等
+不会支持：
+	本地IO
+	等等
+					</pre>
+					</div>
+				  </div>
+				  <div class="layui-colla-item">
+					<h2 class="layui-colla-title">HTTP.Get(url)</h2>
+					<div class="layui-colla-content">
+					<pre class="layui-code">get提交读取网页内容
+此函数为两种调用方法
+只传url ：
+	var dom=HTTP.Get("http://www.baidu.com") 返回dom对象
+传url和header：
+	var header="cookie:123456=45798";
+	header+="host:www.baidu.com";
+	var dom=HTTP.Get("http://www.baidu.com",header) 返回dom对象
+如果只要html可:
+	dom.toString();
+如需要解析html可：
+	dom.select(".link_title")
+	使用jsonp方式解析具体参考java的选择器
+	返回domlist对象，可使用：dom.toString();转为纯html
+						
+					</pre>
+					</div>
+				  </div>
+				  <div class="layui-colla-item">
+					<h2 class="layui-colla-title">HTTP.Log(message)</h2>
+					<div class="layui-colla-content">
+					<pre class="layui-code">
+HTTP.Log(message)
+打印日志 以下复制到调试界面直接运行
+HTTP.Log(1+2+3)
+HTTP.Log(“我我我”+“爱爱爱你”)
+可在爬取代码插入以显示运行状态
+					</pre>
+					</div>
+				  </div>
+				  <div class="layui-colla-item">
+					<h2 class="layui-colla-title">HTTP.Md5(str)</h2>
+					<div class="layui-colla-content">
+					<pre class="layui-code">
+HTTP.Md5(str)
+可将一个字符串md5加密
+					</pre>
+					</div>
+				  </div>
+				  <div class="layui-colla-item">
+					<h2 class="layui-colla-title">HTTP.Sleep(time)</h2>
+					<div class="layui-colla-content">
+					<pre class="layui-code">
+HTTP.Sleep(time)
+设定爬虫休眠 单位毫秒 
+不建议使用此函数 不过不影响
+					</pre>
+					</div>
+				  </div>
+				  <div class="layui-colla-item">
+					<h2 class="layui-colla-title">HTTP.EnBase64(str)</h2>
+					<div class="layui-colla-content">
+					<pre class="layui-code">
+HTTP.EnBase64(str)
+base64 解码
+					</pre>
+					</div>
+				  </div>
+				  <div class="layui-colla-item">
+					<h2 class="layui-colla-title">HTTP.DeBase64(str)</h2>
+					<div class="layui-colla-content">
+					<pre class="layui-code">
+HTTP.DeBase64(str)
+base64编码
+					</pre>
+					</div>
+				  </div>
+				</div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+    </div>
+	<div class="layui-col-md1"style="height: 11px;"></div>
+  </div>
+
+  
+  
+</div>
+
+
+<script src="layer/layer.js" charset="utf-8"></script>
+<script src="layui/layui.js" charset="utf-8"></script>
+<script>function GetRandomNum(Min,Max){return(Min + Math.round(Math.random() * (Max - Min)));}</script>
+<script>
+
+layui.config({
+  version: '1512640681367' //为了更新 js 缓存，可忽略
+});
+var TAB={
+	add:function(url,id){
+		var element = layui.element;
+		element.tabAdd('demo', {
+			title: '新选项' + (Math.random() * 1000 | 0) //用于演示
+			, content: '<iframe data-frameid="'+'kkk'+'" frameborder="0" name="content" scrolling="no" width="100%" src="' + url + '"></iframe>'
+			, id: id
+		})
+	},
+	chan:function(fiff,id){
+		var element = layui.element;
+		element.tabChange(fiff, id); //切换到：用户管理
+	}     
+};	
+var listdata=[
+	{
+		id:"a",
+		url:"http://www.baidu.com"
+	},
+	{
+		id:"a",
+		url:"http://www.baidu.com"
+	}
+];
+function ADD(data){
+	for (x in data)
+	{
+		console.log(data[x].url,data[x].id);
+		TAB.add(data[x].url,data[x].id);
+	}
+}
+</script>
+<script>
+//初始化对象
+    editor = ace.edit("code");
+
+    //设置风格和语言（更多风格和语言，请到github上相应目录查看）
+    theme = "clouds"
+    language = "javascript"
+    editor.setTheme("ace/theme/" + theme);
+    editor.session.setMode("ace/mode/" + language);
+
+    //字体大小
+    editor.setFontSize(17);
+
+    //设置只读（true时只读，用于展示代码）
+    editor.setReadOnly(false);
+
+    //自动换行,设置为off关闭
+    editor.setOption("wrap", "free")
+
+	
+    //启用提示菜单
+    ace.require("ace/ext/language_tools");
+    editor.setOptions({
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+    });
+var data={登陆:"a",同步:"b",退了:"c",Code:"d",api文档:"e"};
+layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element','form'], function(){
+	//ADD(listdata); 
+  TAB.chan("demo","b")
+  var element = layui.element;
+  var form = layui.form;
+  element.on('nav(demo)', function(elem){
+    var meg=data[elem.text().trim()];
+	if(meg=="b" || meg=="c")
+	{
+		var layer = layui.layer;
+		layer.msg("\""+elem.text()+'"_功能没有完工！！！', {time: 3000, icon:6});
+	}
+	console.log(elem.text().trim()+data[elem.text().trim()]);
+	TAB.chan("demo",data[elem.text().trim()])
+		/*layer.open({
+			content:elem.text().trim()
+			,skin: 'layui-layer-lan'
+			,closeBtn: 0
+			,anim: GetRandomNum(0,6) //动画类型
+		}); */ 
+    });
+	form.on('radio(form_1)', function(data){
+	  $("input[name='ExPws']").val(data.value)
+	}); 
+	form.on('radio(form_2)', function(data){
+	  $("input[name='ExPws']").val(data.value)
+	}); 
+});
+$(document).ready(function(){
+  $("#bot").click(function(){
+        var b = new Base64();
+        var str = b.encode(editor.getValue());
+		$.post("JavaSc.action",{
+            code:str
+        },
+        function(data,status){
+			if($("input[name='ExPws']").val()=="nv"){
+				msg1(data,0);
+			}else{msg1(data,1);}
+    });
+    console.log($("#a").val());
+  });
+  $(".node").click(function(){
+        var layer = layui.layer;
+		layer.msg($(this).text(), {time: 2000, icon:6});
+    });
+  });
+
+function msg1(text,type)
+{
+	//使用html展示
+	//type==0 html   ==1  text
+		layer.open({
+        type: 1 
+        ,title: '云'
+        ,area: ['390px', '260px']
+        ,shade: 0
+        ,maxmin: true
+		,anim: GetRandomNum(0,6)
+        ,content: type==0?'<pre class="layui-code" id="code1">'+text+"</pre>":text
+        ,btn: ['复制', '关闭'] 
+        ,yes: function(){
+		  window.clipboardData.setData('text',$("#code1").text());
+        }
+        ,btn2: function(){
+          layer.closeAll();
+        }
+        ,zIndex: layer.zIndex 
+        ,success: function(layero){
+          layer.setTop(layero); 
+        }
+      });
+}
+</script>
+
+</body>
+</html>
